@@ -22,3 +22,15 @@ export const isAntDesignProOrDev = (): boolean => {
 };
 
 export const getPageQuery = () => parse(window.location.href.split('?')[1]);
+
+export const currentDomain: string = ((hostname): string => {
+  let domain;
+  // 判断是否为IP
+  if (/^((\d+\.\d+\.\d+\.\d+)|localhost)$/.test(hostname)) {
+    domain = hostname;
+  } else {
+    // 截取主域名
+    domain = `.${hostname.split('.').slice(-2).join('.')}`;
+  }
+  return domain;
+})(window.location.hostname);
